@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 
 
 /* GET page that shows file size */
-router.post('/uploadAudio', upload.single('file'), function(req, res, next) {
+router.post('/uploadAudio', upload.single('clip'), function(req, res, next) {
   	console.log(req.file);
   	if(req.fileValidationError) {
         return res.status(500).send(req.fileValidationError);

@@ -234,8 +234,7 @@ function uploadToSurvey(blob) {
     
     // ATTACH MY BLOB TO A FORM (SE)
     var fd = new FormData();
-    fd.append("MAX_FILE_SIZE", 16777216);
-    fd.append('fileField', blob, fileName);
+    fd.append('clip', blob, fileName);
 
     // HIT MY UPLOAD SERVICE
     $.ajax({
