@@ -26,7 +26,7 @@ var upload = multer({
 		} else {
 			cb(null, true);
 		}
-	}
+	},
 	storage: storage
 });
 
