@@ -9,7 +9,7 @@ var audioInput = null;
 var sampleRate = null;
 var audioContext = null;
 var context = null;
-var outputElement = document.getElementById('output');
+var outputElement;
 var outputString;
 var rate = 16000;    // DOWNSAMPLE TO 16kHz
 
@@ -35,6 +35,14 @@ if (navigator.getUserMedia){
 //         "optional": []
 //     },
 // });
+
+$(document).ready(function(){
+    outputElement = document.getElementById('output');
+
+    $("#mic").click(function(){
+        toggleRecording($(this));
+    });
+});
 
 function toggleRecording(yourButton) {
     if (yourButton.hasClass("recording")) {
@@ -141,10 +149,6 @@ function toggleRecording(yourButton) {
         outputElement.innerHTML = 'Recording now...';
     }
 }
-
-$("#mic").click(function(){
-    toggleRecording($(this));
-});
 
 function interleave(leftChannel, rightChannel){
   var length = leftChannel.length + rightChannel.length;
