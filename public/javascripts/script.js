@@ -12,6 +12,7 @@ var context = null;
 var outputElement;
 var outputString;
 var rate = 16000;    // DOWNSAMPLE TO 16kHz
+var fileName = "recording.wav";
 
 // feature detection 
 if (!navigator.getUserMedia)
