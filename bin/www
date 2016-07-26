@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('VoiceRecorder:server');
 var http = require('http');
+var https = require('https'); // HTTPS
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,14 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+// HTTPS
+var options = {
+  host: '127.0.0.1',
+  key: fs.readFileSync('../ssl/server.key'),
+  cert: fs.readFileSync('../ssl/server.crt')
+};
+https.createServer(options, app);
 
 /**
  * Listen on provided port, on all network interfaces.
