@@ -29,8 +29,8 @@ var fileFilter = function (req, file, cb) {
 var upload = multer({ 
 	dest: 'uploads/',
 	limits: { fileSize: 16000000 },
-	fileFilter: fileFilter
-	// storage: storage
+	fileFilter: fileFilter,
+	storage: storage
 });
 
 // OR
