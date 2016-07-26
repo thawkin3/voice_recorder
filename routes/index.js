@@ -3,23 +3,36 @@ var router = express.Router();
 var multer  = require('multer');
 
 // Save the files in the uploads directory
-// var upload = multer({ 
-// 	dest: 'uploads/',
-// 	limits: { fileSize: 16000000 },
-// 	fileFilter: function (req, file, cb) {
-// 		var acceptableMimeTypes = ['audio/wav', 'audio/x-wav'];
-// 		if (acceptableMimeTypes.indexOf(file.mimetype) == -1) {
-// 			req.fileValidationError = 'Sorry, this file type is not allowed for upload';
-// 			return cb(null, false, new Error('Sorry, this file type is not allowed for upload'));
-// 		} else {
-// 			cb(null, true);
-// 		}
-// 	}
-// });
+var uploadFolder = 'uploads';
+var storage = multer.diskStorage({
+	// used to determine within which folder the uploaded files should be stored.
+	destination: function(req, file, callback) {
+		callback(null, uploadFolder);
+	},
+	filename: function(req, file, callback) {
+		// req.body.name should contain the name of track
+		callback(null, file.originalname);
+	}
+});
+
+var upload = multer({ 
+	// dest: 'uploads/',
+	limits: { fileSize: 16000000 },
+	fileFilter: function (req, file, cb) {
+		var acceptableMimeTypes = ['audio/wav', 'audio/x-wav'];
+		if (acceptableMimeTypes.indexOf(file.mimetype) == -1) {
+			req.fileValidationError = 'Sorry, this file type is not allowed for upload';
+			return cb(null, false, new Error('Sorry, this file type is not allowed for upload'));
+		} else {
+			cb(null, true);
+		}
+	}
+	storage: storage
+});
 
 // OR
 // Save the files with no limits or validation requirements
-var upload = multer({ dest: 'uploads/' });
+// var upload = multer({ dest: 'uploads/' });
 
 // OR
 // Don't save the files anywhere

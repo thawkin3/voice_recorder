@@ -245,7 +245,7 @@ function uploadToSurvey(blob) {
             Accept : "application/json"
         },
         processData: false,
-        contentType: false,
+        contentType: "application/json",
     }).done(function(data) {
         console.log(data);
         outputElement.innerHTML = 'File upload complete!';        
